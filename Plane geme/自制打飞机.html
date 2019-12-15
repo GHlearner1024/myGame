@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes zidan {
+            0% {
+                top: -100px;
+            }
+
+            100% {
+                top: -888px
+            }
+        }
+
+        @keyframes foe {
+            0% {
+                top: 0;
+            }
+
+            100% {
+                top: 100%
+            }
+        }
+
+        body {
+            background-color: #000;
+        }
+
+
+
+        .fj {
+            width: 100px;
+            height: 70px;
+            background: url(./gameimgs/flyji.png);
+            background-size: 100px 70px;
+            position: absolute;
+        }
+
+        .fj span {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -4px);
+            background-color: #000;
+            animation: zidan 1s forwards;
+            display: block;
+            width: 8px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .bigfj {
+            background: url(./gameimgs/anxia.png);
+            width: 120px;
+            height: 100px;
+            background-size: 120px 100px;
+            position: absolute;
+        }
+
+        .bigfj span {
+            width: 30px;
+            height: 100px;
+            background-color: rgb(204, 22, 22);
+        }
+
+        /* .dazidan {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -4px);
+            background-color: #000;
+            animation: zidan 1.5s forwards;
+            display: block;
+            width: 20px;
+            height: 30px;
+            border-radius: 50%;
+        } */
+
+        .body {
+            position: relative;
+            height: 650px;
+            width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            cursor: none;
+            transition: all;
+        }
+
+        #bigbiubiu {
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            left: 0;
+            top: 50px;
+        }
+
+        #superbiubiu {
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            left: 0;
+            top: 0px;
+        }
+
+        #smbiubiu {
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            left: 0;
+            top: 100px;
+        }
+
+        #change {
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            left: 0;
+            top: 150px;
+        }
+
+        #kaiguan {
+            position: absolute;
+            width: 200px;
+            height: 50px;
+            left: 0;
+            top: 300px;
+        }
+
+        #zda {
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            left: 0;
+            top: 200px;
+        }
+
+        #huoli {
+            position: absolute;
+            width: 250px;
+            height: 50px;
+            right: 0px;
+            top: 600px;
+            border-radius: 50px;
+        }
+
+
+        #sxiao {
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            left: 0;
+            top: 250px;
+        }
+
+
+
+        .foe {
+            position: absolute;
+            top: 0;
+            width: 50px;
+            height: 40px;
+            background: url(./gameimgs/flyji.png);
+            background-size: 50px 40px;
+            transform: rotate(180deg);
+            animation: foe 3s linear forwards;
+        }
+
+        #gameOver {
+            display: none;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 50px;
+            padding: 50px;
+            width: 500px;
+            height: 300px;
+            position: fixed;
+            left: 50%;
+            top: 40%;
+            transform: translate(-50%, -50%);
+            background-color: #e9e9e9;
+            border-radius: 50px;
+            border: 2px solid #222;
+        }
+
+        #gameOver span {
+
+            position: absolute;
+            font-size: 16px;
+            top: 200px;
+            left: 175px;
+            height: 40px;
+            width: 150px;
+            line-height: 35px;
+            border-radius: 20px;
+            border: 2px solid rgb(27, 27, 27);
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        input {
+            display: none;
+        }
+
+        .an {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="body">
+        <div class="fj" data-bx=url(./gameimgs/anxia.png)> </div> </header> <input type="button" value="极其困难"
+            id="superbiubiu">
+            <input type="button" value="点击开启无敌模式，建议不要开，哈哈" id="huoli">
+            <input type="button" value="比较困难" id="bigbiubiu">
+            <input type="button" value="一般模式" id="smbiubiu">
+            <input type="button" value="大型号" id="change">
+            <input type="button" value="开始游戏" id="kaiguan" style="display: block;">
+            <div id="gameOver">
+                GAME OVER
+                <span>再来一次</span>
+            </div>
+</body>
+<script>
+    var fj = document.querySelector(".fj")
+    var body = document.querySelector(".body")
+    var zidan = fj.getElementsByTagName("span")
+    var bigbiubiu = document.querySelector("#bigbiubiu")
+    var smbiubiu = document.querySelector("#smbiubiu")
+    var superbiubiu = document.querySelector("#superbiubiu")
+    var change = document.querySelector("#change")
+    var kaiguan = document.querySelector('#kaiguan')
+    var huoli = document.querySelector("#huoli")
+    var gameover = document.querySelector('#gameOver')
+    var again = gameover.getElementsByTagName("span")
+    var btns = document.getElementsByTagName("input")
+
+    var dr = setInterval("diren()", 1000);
+    clearInterval(dr);
+    // 开始游戏按钮
+    kaiguan.addEventListener("click", function () {
+        if (this.value == "开始游戏") {
+            dr = setInterval("diren()", 100);
+            this.value = "暂停游戏";
+            for (let i = 0; i < btns.length; i++) {
+                btns[i].setAttribute("class", "an")
+            }
+        }
+        else { this.value = "暂停游戏"; clearInterval(dr); this.value = "开始游戏" }
+    })
+    // 火力无限
+    var dada
+    huoli.addEventListener("click", function () {
+        if (this.value != '已开启,biubiubiu~') {
+            this.value = '已开启,biubiubiu~'
+            dada = setInterval(() => {
+                body.click()
+                body.style.backgroundColor = `rgb(${Math.random() * 256},${Math.random() * 256},${Math.random() * 256})`
+            }, 100);
+        }
+        else {
+            this.value = '点击开启火力无限，建议不要开，哈哈';
+            clearInterval(dada)
+            body.style.backgroundColor = "#fff"
+        }
+    })
+
+    body.addEventListener("mousemove", function (e) {
+        fj.style.left = e.pageX - body.offsetLeft - 50 + "px"
+        fj.style.top = e.pageY - 35 + "px"
+    })
+    change.addEventListener("click", function () {
+        if (change.value == "大型号") {
+            change.value = "原型号";
+            fj.classList.add("bigfj")
+
+        } else {
+            fj.classList.remove("bigfj");
+            change.value = "大型号"
+        }
+    })
+    smbiubiu.addEventListener("click", function (e) {
+        clearInterval(dr);
+        dr = setInterval(diren, 100);
+
+    })
+    bigbiubiu.addEventListener("click", function (e) {
+        clearInterval(dr);
+        dr = setInterval(diren, 50);
+    })
+    superbiubiu.addEventListener("click", function (e) {
+        clearInterval(dr);
+        dr = setInterval("diren()", 10);
+    })
+    // 子弹坐标  zdX  zdY
+    var zdX, zdY, drX, drY, i = 0
+    body.addEventListener("click", function (e) {
+        var zidan = document.createElement("span")
+        zidan.index = i; i++
+        fj.appendChild(zidan)
+        var zdpositipn = setInterval(() => {
+            zdX = zidan.offsetParent.offsetLeft + zidan.offsetLeft + zidan.offsetWidth / 2;
+            zdY = zidan.offsetParent.offsetTop + zidan.offsetTop + zidan.offsetHeight / 2;
+        }, 1);
+        // setTimeout(() => {
+        //     clearInterval(zdpositipn)
+        // }, 1000);
+
+        zidan.addEventListener("animationend", function (e) {
+            fj.removeChild(zidan)
+        })
+    })
+
+
+    // })
+    // body.addEventListener("keydown", function (e) {
+    //     if (keyspace == 13) {
+    //         fj.innerHTML = "<span>biu</span>"
+    //     }
+
+    // })
+    // 随机降落目标封装
+    function diren(e) {
+        var foe = document.createElement("div")
+        foe.setAttribute("class", "foe")
+        foe.style.left = Math.random() * 950 + "px"
+        body.appendChild(foe)
+
+        // 子弹碰撞飞机 、 死亡
+        var pz = setInterval(() => {
+            drX = foe.offsetLeft
+            drY = foe.offsetTop
+            if (zdX - 10 >= drX && zdX <= drX + 60 && zdY <= drY && zdY >= zdY - 50) {
+                if (foe) { body.removeChild(foe) }
+            }
+            // GAME OVER 
+            var a = fj.offsetLeft + fj.offsetWidth / 2;
+            var b = fj.offsetTop + fj.offsetTop / 2;
+            if (a > drX && a < drX + foe.offsetWidth && b > drY && b < drY + foe.offsetHeight) {
+                gameover.style.display = 'block';
+                fj.style.display = "none";
+                return
+            }
+
+        }, 1);
+
+        // 清除动落下的目标
+        setTimeout(() => {
+            body.removeChild(foe)
+        }, 3000);
+        return foe
+    }
+    again[0].addEventListener("click", function () {
+        location.href = '自制打飞机.html'
+    })
+
+
+</script>
+
+</html>

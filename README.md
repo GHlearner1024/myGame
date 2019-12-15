@@ -1,2 +1,2 @@
-# myGame
-Web games based on CSS3 and JavaScript
+# GameDome
+Web pages based on CSS3 and JavaScript
